@@ -23,6 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:staged": "yarn test --coverage --findRelatedTests",
+    "test:coverage": "yarn test --coverage --watchAll",
     "eject": "react-scripts eject",
     "lint": "eslint --max-warnings=0 --ext ts,tsx src/ && prettier --list-different \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
@@ -36,12 +38,27 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "yarn test"
+      "yarn test:staged"
     ],
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "eslint --max-warnings=0",
       "prettier --write"
     ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/reportWebVitals.ts",
+      "!src/setupTests.ts",
+      "!src/index.tsx"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80
+      }
+    }
   },
   "browserslist": {
     "production": [
