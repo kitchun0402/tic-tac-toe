@@ -4,6 +4,6 @@ import App from './App'
 /** @todo remove this dummy test later */
 test('renders content', () => {
   render(<App />)
-  const contentElement = screen.getByText(/Hello World/i)
+  const contentElement = screen.getByText(/CI\/CD/i)
   expect(contentElement).toBeInTheDocument()
 })
