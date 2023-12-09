@@ -25,12 +25,19 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --max-warnings=0 --ext ts,tsx src/ && prettier --list-different \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "eslint --max-warnings=0",
+      "prettier --write"
     ]
   },
   "browserslist": {
@@ -59,6 +66,8 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.0.3",
-    "prettier-plugin-organize-imports": "^3.2.3"
+    "prettier-plugin-organize-imports": "^3.2.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1"
   }
 }
