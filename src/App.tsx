@@ -1,11 +1,13 @@
+import { ModalProvider } from 'styled-react-modal'
+import TicTacToe from './containers/TicTacToe/TicTacToe'
 import { GlobalStyle } from './globalStyles'
 
 function App() {
   return (
-    <>
+    <ModalProvider>
       <GlobalStyle />
-      <div className="App">CI/CD</div>
-    </>
+      <TicTacToe />
+    </ModalProvider>
   )
 }
 
