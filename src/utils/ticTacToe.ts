@@ -1,6 +1,12 @@
-import { type GameResult, type Tile } from '../types/gameStates'
-import type PlayerLabel from '../types/playerLabel'
+import { type GameResult, type Tile, type Tiles } from '../types/gameStates'
+import PlayerLabel from '../types/playerLabel'
 
+/**
+ * Checks the result of the Tic Tac Toe game based on the current state of the board.
+ *
+ * @param {Tiles} tiles - An array representing the tiles on the board, where each element is either a player label or null.
+ * @returns {GameResult} The result of the game, can be 'X', 'O', 'DRAW', or null if the game is still ongoing.
+ */
 export const checkGameResult = (
   tiles: Array<PlayerLabel | null>,
 ): GameResult => {
@@ -35,10 +41,37 @@ export const checkGameResult = (
   return null
 }
 
-export const checkIfAllTilesFilled = (tiles: Array<PlayerLabel | null>) => {
+/**
+ * Checks if all tiles on the board are filled.
+ *
+ * @param {Tiles} tiles - An array representing the tiles on the board, where each element is either a player label or null.
+ * @returns {boolean} True if all tiles are filled, false otherwise.
+ */
+export const checkIfAllTilesFilled = (tiles: Tiles): boolean => {
   return tiles.every((tile) => tile)
 }
 
-export const generateEmptyTiles = () => {
-  return Array<Tile>(9).fill(null)
+/**
+ * Generates an array of empty tiles for a square board of the specified size.
+ *
+ * @param {number} [size=3] - The size of each side of the square board.
+ * @returns {Tile[]} An array representing empty tiles.
+ */
+export const generateEmptyTiles = (size: number = 3): Tile[] => {
+  return Array<Tile>(size * size).fill(null)
+}
+
+/**
+ * Gets the next player's turn based on the current player's turn.
+ *
+ * @param {PlayerLabel} playerTurn - The current player's turn label.
+ * @returns {PlayerLabel} The label of the next player's turn.
+ */
+export const getNextPlayerTurn = (playerTurn: PlayerLabel) => {
+  let nextPlayerTurn = PlayerLabel.O
+  // Toggle player turns between 'O' and 'X'
+  if (playerTurn === PlayerLabel.O) {
+    nextPlayerTurn = PlayerLabel.X
+  }
+  return nextPlayerTurn
 }
