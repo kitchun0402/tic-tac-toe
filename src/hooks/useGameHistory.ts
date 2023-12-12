@@ -12,15 +12,8 @@ const initialGameHistory = () => {
 function useGameHistory() {
   const [gameHistory, setGameHistory] =
     useState<GameHistory>(initialGameHistory)
-  const [isClearingHistory, setIsClearingHistory] = useState(false)
   const updateGameHistory = useCallback(
     (currentGameStates: GameStates) => {
-      /**
-       * when current game is over but the user wants to clear the history,
-       * it will keep adding the result to the history.
-       * Therefore, requires isClearingHistory to ensure the entire history is clear.
-       */
-      if (isClearingHistory) return
       const isExisted = gameHistory.some(
         (record) => record.id === currentGameStates.id,
       )
@@ -36,14 +29,11 @@ function useGameHistory() {
           return updatedHistory
         })
       }
-
-      setIsClearingHistory(false)
     },
-    [gameHistory, isClearingHistory],
+    [gameHistory],
   )
 
   const clearGameHistory = () => {
-    setIsClearingHistory(true)
     setGameHistory([])
   }
   useEffect(() => {
