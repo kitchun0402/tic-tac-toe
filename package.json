@@ -28,8 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:staged": "yarn test --coverage --findRelatedTests",
+    "test:staged": "yarn test --findRelatedTests",
     "test:coverage": "yarn test --coverage --watchAll",
+    "cy:run": "cypress run",
     "eject": "react-scripts eject",
     "lint": "eslint --max-warnings=0 --ext ts,tsx src/ && prettier --list-different \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
@@ -56,7 +57,9 @@
       "!src/reportWebVitals.ts",
       "!src/setupTests.ts",
       "!src/index.tsx",
-      "!src/**/*.d.{ts,js,tsx,jsx}"
+      "!src/**/*.d.{ts,js,tsx,jsx}",
+      "!src/**/*.elements.{ts,js,tsx,jsx}",
+      "!src/{configs,types,assets}/**/*"
     ],
     "coverageThreshold": {
       "global": {
@@ -83,7 +86,9 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/cypress": "^1.1.3",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "cypress": "^13.6.1",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard-with-typescript": "^39.1.1",
