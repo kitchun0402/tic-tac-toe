@@ -13,6 +13,7 @@ function GameRecords({ data, onClickRecord }: Props) {
       {data.map((record) => {
         return (
           <Record key={record.id} onClick={() => onClickRecord(record)}>
+            <p>Mode: {record.mode}</p>
             <p>{record.date}</p>
             <RecordBody>
               <h4>

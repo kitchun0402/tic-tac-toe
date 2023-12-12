@@ -6,6 +6,7 @@ import GameRecords from '../../components/GameRecords/GameRecords'
 import Modal from '../../components/Modal/Modal'
 import useGameStates from '../../hooks/useGameStates'
 import { type GameHistory } from '../../types/gameStates'
+import PlayerLabel from '../../types/playerLabel'
 import {
   Container,
   ModalContentWrapper,
@@ -14,7 +15,7 @@ import {
 
 function TicTacToe() {
   const {
-    currentGameStates: { playerTurn, tiles, gameResult },
+    currentGameStates: { playerTurn, tiles, gameResult, mode },
     gameHistory,
     handleTileClick,
     resetGame,
@@ -25,6 +26,15 @@ function TicTacToe() {
 
   const [isGameModeModalOpen, setIsGameModeModalOpen] = useState(true)
   const [isGameHistoryModalOpen, setIsGameHistoryModalOpen] = useState(false)
+
+  const isInPvCMode = mode === 'PvC'
+  const computerLabel = `${
+    // show the label when the current turn is "O" or "O" wins
+    (isInPvCMode && playerTurn === PlayerLabel.O) ||
+    (isInPvCMode && gameResult === PlayerLabel.O)
+      ? ' (Computer)'
+      : ''
+  }`
   const handleClickModeButton = () => {
     setIsGameModeModalOpen(true)
   }
@@ -48,12 +58,15 @@ function TicTacToe() {
   }
   return (
     <Container>
+      {mode && <h1>{mode} mode</h1>}
       {!gameResult && playerTurn && (
-        <PlayerTurnLabel>{playerTurn} turn</PlayerTurnLabel>
+        <PlayerTurnLabel>{`${playerTurn}${computerLabel} turn`}</PlayerTurnLabel>
       )}
       {gameResult && (
         <PlayerTurnLabel>
-          {gameResult === 'DRAW' ? 'Tied' : `${gameResult} won!`}
+          {gameResult === 'DRAW'
+            ? 'Tied'
+            : `${gameResult}${computerLabel} won!`}
         </PlayerTurnLabel>
       )}
       <Board tiles={tiles} onTileClick={handleTileClick} />
