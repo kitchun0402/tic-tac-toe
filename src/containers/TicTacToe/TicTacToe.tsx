@@ -30,7 +30,7 @@ function TicTacToe() {
   const isInPvCMode = mode === 'PvC'
   const computerLabel = `${
     // show the label when the current turn is "O" or "O" wins
-    (isInPvCMode && playerTurn === PlayerLabel.O) ||
+    (isInPvCMode && !gameResult && playerTurn === PlayerLabel.O) ||
     (isInPvCMode && gameResult === PlayerLabel.O)
       ? ' (Computer)'
       : ''
