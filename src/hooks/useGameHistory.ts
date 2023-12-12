@@ -1,17 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 import { LocalStorageKey } from '../configs/localStorage'
 import { type GameHistory, type GameStates } from '../types/gameStates'
+import { getGameHistoryFromLocalStorage } from '../utils/gameHistory'
 
-const initialGameHistory = () => {
-  const gameHistory = localStorage.getItem(LocalStorageKey.TIC_TAC_TOE_HISTORY)
-  if (gameHistory) {
-    return JSON.parse(gameHistory) as GameHistory
-  }
-  return []
-}
 function useGameHistory() {
-  const [gameHistory, setGameHistory] =
-    useState<GameHistory>(initialGameHistory)
+  const [gameHistory, setGameHistory] = useState<GameHistory>(
+    getGameHistoryFromLocalStorage(),
+  )
   const updateGameHistory = useCallback(
     (currentGameStates: GameStates) => {
       const isExisted = gameHistory.some(
