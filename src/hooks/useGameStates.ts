@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { COMPUTER_ACTION_DELAY_IN_MS } from '../configs/gameStates'
 import { LocalStorageKey } from '../configs/localStorage'
 import {
   type GameMode,
@@ -140,19 +141,30 @@ function useGameStates() {
    * Handle PvC logic
    */
   useEffect(() => {
+    let timeoutId: string | number | NodeJS.Timeout | null | undefined = null
     if (
       currentGameStates.mode === 'PvC' &&
       currentGameStates.playerTurn === PlayerLabel.O
     ) {
-      const availableMoveIndice = []
-      for (let index = 0; index < currentGameStates.tiles.length; index++) {
-        // if a tile is null, it hasn't been filled
-        if (!currentGameStates.tiles[index]) {
-          availableMoveIndice.push(index)
+      // delay the computer's action to provide a better user experience
+      timeoutId = setTimeout(() => {
+        const availableMoveIndice = []
+        for (let index = 0; index < currentGameStates.tiles.length; index++) {
+          // if a tile is null, it hasn't been filled
+          if (!currentGameStates.tiles[index]) {
+            availableMoveIndice.push(index)
+          }
         }
+        const randomIndex = Math.floor(
+          Math.random() * availableMoveIndice.length,
+        )
+        handleTileClick(availableMoveIndice[randomIndex], false)
+      }, COMPUTER_ACTION_DELAY_IN_MS)
+    }
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
       }
-      const randomIndex = Math.floor(Math.random() * availableMoveIndice.length)
-      handleTileClick(availableMoveIndice[randomIndex], false)
     }
   }, [
     currentGameStates.mode,
