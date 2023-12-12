@@ -18,7 +18,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Tests
+      - name: Run Cypress E2E tests
+        uses: cypress-io/github-action@v6
+
+      - name: Run Unit Tests
         run: npm test
 
       - name: Build The Project
