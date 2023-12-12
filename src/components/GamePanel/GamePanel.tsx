@@ -17,13 +17,13 @@ function GamePanel({
 }: Props) {
   return (
     <Container {...restProps}>
-      <IconButton data-testId="reset-button" onClick={onClickReset}>
+      <IconButton data-testid="reset-button" onClick={onClickReset}>
         <ResetIcon />
       </IconButton>
-      <IconButton data-testId="mode-button" onClick={onClickMode}>
+      <IconButton data-testid="mode-button" onClick={onClickMode}>
         <BattleIcon />
       </IconButton>
-      <IconButton data-testId="history-button" onClick={onClickHistory}>
+      <IconButton data-testid="history-button" onClick={onClickHistory}>
         <HistoryIcon />
       </IconButton>
     </Container>
