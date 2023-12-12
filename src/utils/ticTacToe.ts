@@ -2,7 +2,7 @@ import { type GameResult, type Tile, type Tiles } from '../types/gameStates'
 import PlayerLabel from '../types/playerLabel'
 
 /**
- * Checks the result of the Tic Tac Toe game based on the current state of the board.
+ * Checks the result of the Tic Tac Toe game based on the current state of the 3x3 board.
  *
  * @param {Tiles} tiles - An array representing the tiles on the board, where each element is either a player label or null.
  * @returns {GameResult} The result of the game, can be 'X', 'O', 'DRAW', or null if the game is still ongoing.
@@ -11,11 +11,11 @@ export const checkGameResult = (
   tiles: Array<PlayerLabel | null>,
 ): GameResult => {
   const winningCombinations = [
-    // columns
+    // rows
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
-    // rows
+    // columns
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
