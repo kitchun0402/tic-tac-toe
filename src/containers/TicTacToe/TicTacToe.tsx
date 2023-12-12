@@ -20,6 +20,7 @@ function TicTacToe() {
     resetGame,
     clearGameHistory,
     updateCurrentGameStates,
+    updateGameMode,
   } = useGameStates()
 
   const [isGameModeModalOpen, setIsGameModeModalOpen] = useState(true)
@@ -31,9 +32,8 @@ function TicTacToe() {
     setIsGameHistoryModalOpen(true)
   }
   const selectGameMode = (mode: 'PvP' | 'PvC' | 'Resume') => {
-    /** @todo handle PvC */
     if (mode !== 'Resume') {
-      resetGame()
+      updateGameMode(mode)
     }
     setIsGameModeModalOpen(false)
   }
@@ -43,7 +43,7 @@ function TicTacToe() {
   }
 
   const viewSelectedGameRecord = (record: GameHistory[0]) => {
-    updateCurrentGameStates(record)
+    updateCurrentGameStates(() => record)
     closeHistoryModal()
   }
   return (
@@ -62,6 +62,7 @@ function TicTacToe() {
         onClickMode={handleClickModeButton}
         onClickHistory={handleClickHistoryButton}
       />
+      {/** @todo can extract it into a seperate component */}
       {isGameModeModalOpen && (
         <Modal isOpen={isGameModeModalOpen}>
           <ModalContentWrapper>
@@ -72,6 +73,7 @@ function TicTacToe() {
           </ModalContentWrapper>
         </Modal>
       )}
+      {/** @todo can extract it into a seperate component */}
       {isGameHistoryModalOpen && (
         <Modal
           isOpen={isGameHistoryModalOpen}
@@ -87,7 +89,13 @@ function TicTacToe() {
             />
 
             <Button onClick={closeHistoryModal}>Close</Button>
-            <Button onClick={clearGameHistory} variant="outlined">
+            <Button
+              onClick={() => {
+                resetGame()
+                clearGameHistory()
+              }}
+              variant="outlined"
+            >
               Clear History
             </Button>
           </ModalContentWrapper>
