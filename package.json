@@ -31,6 +31,8 @@
     "test:staged": "yarn test --findRelatedTests",
     "test:coverage": "yarn test --coverage --watchAll",
     "cy:run": "cypress run",
+    "cy:run-gh": "start-server-and-test 3000 cy:run",
+    "cy:open": "cypress open",
     "eject": "react-scripts eject",
     "lint": "eslint --max-warnings=0 --ext ts,tsx src/ && prettier --list-different \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\"",
@@ -102,6 +104,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "prettier-plugin-organize-imports": "^3.2.3"
+    "prettier-plugin-organize-imports": "^3.2.3",
+    "start-server-and-test": "^2.0.3"
   }
 }
