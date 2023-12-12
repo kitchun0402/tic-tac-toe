@@ -15,6 +15,7 @@ function Board({ tiles, onTileClick }: Props) {
         .map((_, index) => {
           return (
             <Tile
+              data-testId={`tile-${index}`}
               key={index}
               label={tiles[index]}
               onClick={() => onTileClick(index)}
