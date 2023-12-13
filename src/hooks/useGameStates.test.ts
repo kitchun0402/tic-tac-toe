@@ -21,7 +21,7 @@ describe('useGameStates', () => {
       tiles: Array(9).fill(null),
       playerTurn: 'X',
       gameResult: null,
-      mode: null,
+      mode: 'PvP',
     }
 
     expect(result.current.currentGameStates).toEqual(expectedInitialState)
@@ -72,7 +72,7 @@ describe('useGameStates', () => {
       tiles: Array(9).fill(null),
       playerTurn: 'X',
       gameResult: null,
-      mode: null,
+      mode: 'PvP',
     }
 
     expect(result.current.currentGameStates).toEqual(expectedInitialState)
@@ -81,9 +81,9 @@ describe('useGameStates', () => {
   it('should update the game mode', () => {
     const { result } = renderHook(() => useGameStates())
     act(() => {
-      result.current.updateGameMode('PvP')
+      result.current.updateGameMode('PvC')
     })
-    expect(result.current.currentGameStates.mode).toBe('PvP')
+    expect(result.current.currentGameStates.mode).toBe('PvC')
   })
 
   it('should get a random move for the computer on PvC mode', () => {

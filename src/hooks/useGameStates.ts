@@ -28,7 +28,7 @@ const initialStates = ((): GameStates => {
     tiles: generateEmptyTiles(),
     playerTurn: PlayerLabel.X,
     gameResult: null,
-    mode: null,
+    mode: 'PvP',
   }
 })()
 
